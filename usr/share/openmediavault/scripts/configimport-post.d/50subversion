@@ -1,0 +1,73 @@
+#!/bin/sh
+#
+# @license		http://www.gnu.org/licenses/gpl.html GPL Version 3
+# @author		Ian Moore <imooreyahoo@gmail.com>
+# @copyright	Copyright (c) 2011-2012 Ian Moore
+#
+# This file is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# any later version.
+#
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file. If not, see <http://www.gnu.org/licenses/>.
+
+set -e
+
+. /etc/default/openmediavault
+. /usr/share/openmediavault/scripts/helper-functions
+
+case "$1" in
+
+        configure)
+
+                # Get root
+                rroot=$(omv_config_get "//services/subversion/repository-root")
+
+		if [ "${rroot}" = "" ]; then
+			exit 0
+		fi
+
+                if [ ! -d "${rroot}" ]; then
+                        /bin/mkdir -p ${rroot}
+                        chown www-data ${rroot}
+                        chmod 0755 ${rroot}
+                fi
+
+                # Add permitted users and groups to each repo
+                index=$(omv_config_get_count "//services/subversion/repos/repo")
+                while [ ${index} -gt 0 ]
+                do
+
+                        repo=$(omv_config_get "//services/subversion/repos/repo[position()=${index}]/name")
+
+                        if [ ! -d "${rroot}/${repo}" ]; then
+
+                                /bin/mkdir -p "${rroot}/${repo}"
+
+                                chown www-data "${rroot}/${repo}"
+
+                                chmod 0755 "${rroot}/${repo}"
+
+                                sudo www-data -c "svnadmin create ${rroot}/${repo}"
+
+                        fi
+
+                        index=$(( ${index} - 1 ))
+
+                done
+
+        ;;
+
+        *)
+                echo "$(basename $0) called with unknown argument '$1'" >&2
+                exit 1
+        ;;
+esac
+
+exit 0

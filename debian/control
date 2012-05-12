@@ -1,0 +1,15 @@
+Source: openmediavault-subversion
+Section: devel
+Priority: optional
+Maintainer: Marcel Beck <marcel.beck@mbeck.org>
+Build-Depends-Indep: debhelper (>> 7 )
+Standards-Version: 3.6.10
+Homepage: https://github.com/OMV-Plugins/openmediavault-subversion
+
+Package: openmediavault-subversion
+Architecture: all
+Depends: openmediavault (>= 0.3), apache2.2-common, subversion, libapache2-svn,
+ libapache2-mod-authnz-external, pwauth
+Description: OpenMediaVault Subversion (SVN server) plugin
+ Run a subversion server through OMV's apache2. Create and manage
+ repositories through OMV's interface.

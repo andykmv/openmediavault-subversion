@@ -1,0 +1,82 @@
+#!/bin/sh
+#
+# @license		http://www.gnu.org/licenses/gpl.html GPL Version 3
+# @author		Ian Moore <imooreyahoo@gmail.com>
+# @copyright	Copyright (c) 2011-2012 Ian Moore
+#
+# This file is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# any later version.
+#
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file. If not, see <http://www.gnu.org/licenses/>.
+
+set -e
+
+. /etc/default/openmediavault
+. /usr/share/openmediavault/scripts/helper-functions
+
+
+OMV_SUBVERSION_CONFIG=${OMV_SUBVERSION_CONFIG:-"/etc/apache2/openmediavault-webgui.d/subversion.conf"}
+
+# Enable/disable service
+if [ "$(omv_config_get "//services/subversion/enable")" = "0" ]; then
+        if [ -f ${OMV_SUBVERSION_CONFIG} ]; then
+                /bin/rm -f ${OMV_SUBVERSION_CONFIG}
+                exit $?
+        fi
+	exit 0
+fi
+
+# Create apache config file
+cat <<EOF > ${OMV_SUBVERSION_CONFIG}
+# defaults for subversion
+# sourced by apache on startup
+
+AddExternalAuth pwauth /usr/sbin/pwauth
+SetExternalAuthMethod pwauth pipe
+
+<Location /svn/>
+   DAV svn
+   SVNListParentPath on
+   AuthType Basic
+   AuthBasicProvider external
+   AuthExternal pwauth
+EOF
+
+# Enable/disable auth requirement
+if [ "$(omv_config_get "//services/subversion/require-auth")" = "1" ]; then
+   echo "   Require valid-user" >> ${OMV_SUBVERSION_CONFIG}
+else
+   cat <<EOF >> ${OMV_SUBVERSION_CONFIG}
+   <LimitExcept GET PROPFIND OPTIONS REPORT>
+      Require valid-user
+   </LimitExcept>
+EOF
+fi
+
+xmlstarlet sel -t -m "//services/subversion" \
+  -o "AuthzSVNAccessFile /etc/subversion/authz" -n \
+  -v "concat('   SVNParentPath ',repository-root)" -n \
+  -v "concat('   AuthName &quot;',realm,'&quot;')" -n \
+  -o "&lt;/Location&gt;" -n \
+  ${OMV_CONFIG_FILE} | xmlstarlet unesc >> ${OMV_SUBVERSION_CONFIG}
+
+# Check that configtest passed. We don't want
+# apache to fail to start
+CTEST=`/usr/sbin/apache2ctl configtest 2>&1 || echo ___FAILED___`
+
+if [ `echo $CTEST | grep -c ___FAILED___` -gt 0 ]; then
+        echo "Config test failed. Removing ${OMV_SUBVERSION_CONFIG}..."
+	# Pass error to web page
+        echo `/usr/sbin/apache2ctl configtest 2>&1 || echo `
+        /bin/rm -f ${OMV_SUBVERSION_CONFIG}
+        exit 1
+fi
+

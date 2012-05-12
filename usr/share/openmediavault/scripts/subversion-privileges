@@ -1,0 +1,135 @@
+#!/bin/sh
+#
+# @license		http://www.gnu.org/licenses/gpl.html GPL Version 3
+# @author		Ian Moore <imooreyahoo@gmail.com>
+# @copyright	Copyright (c) 2011-2012 Ian Moore
+#
+# This file is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# any later version.
+#
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file. If not, see <http://www.gnu.org/licenses/>.
+
+set -e
+
+. /etc/default/openmediavault
+. /usr/share/openmediavault/scripts/helper-functions
+
+OMV_SUBVERSION_AUTHZ=${OMV_SUBVERSION_AUTHZ:-"/etc/subversion/authz"}
+
+
+# Just exit if service is disabled
+if [ "$(omv_config_get "//services/subversion/enable")" = "0" ]; then
+        exit 0
+fi
+
+
+# Add groups. Yes, I do not like xpath. If there is a simpler way
+# to do this without having to rely on /etc/group, I would love to
+# hear it.
+#
+# E.g. contains("ftp") would match "ftp-banned" and "ftpadmins" and
+# this xmlstarlet/libxml/xpath installation doesn't seem to support
+# ends-with()
+#
+echo '[groups]'>${OMV_SUBVERSION_AUTHZ}
+index=$(omv_config_get_count "//system/usermanagement/groups/group")
+while [ ${index} -gt 0 ]
+do
+
+	group=$(omv_config_get "//system/usermanagement/groups/group[position()=${index}]/name")
+
+        members=$(grep "^${group}:" /etc/group | awk -F: '{ print $4 }' | sed -e s'/,\s*/, /g')
+
+        echo "${group} = ${members}" >>${OMV_SUBVERSION_AUTHZ}
+
+        index=$(( ${index} - 1 ))
+done
+
+# Require auth
+if [ "$(omv_config_get "//services/subversion/require-auth")" = "0" ]; then
+   cat <<EOF >> ${OMV_SUBVERSION_AUTHZ}
+
+[/]
+* = r
+EOF
+fi
+
+# Add permitted users and groups to each repo
+index=$(omv_config_get_count "//services/subversion/repos/repo")
+while [ ${index} -gt 0 ]
+do
+
+	echo '' >>${OMV_SUBVERSION_AUTHZ}
+
+	# Get the repository reference and path
+	reporef=$(omv_config_get "//services/subversion/repos/repo[position()=${index}]/uuid")
+
+	# Repo name	
+	xmlstarlet sel -t -m "//services/subversion/repos/repo[position()=${index}]" \
+	  -v "concat('[',name,':/]')" \
+	  ${OMV_CONFIG_FILE} | xmlstarlet unesc >> ${OMV_SUBVERSION_AUTHZ}
+
+	# Repo default privileges
+	dpriv=$(omv_config_get "//services/subversion/repos/repo[position()=${index}]/default-access")
+
+	priv=''
+	case ${dpriv} in
+	"read-only")
+		priv='r';;
+	"write")
+		priv='rw';;
+	esac
+
+	echo "* = ${priv}" >>${OMV_SUBVERSION_AUTHZ}
+
+	# Get repository user privileges
+	privileges=$(xmlstarlet sel -t -m "//services/subversion/repos/repo[uuid='${reporef}']/privileges/privilege[userref]" \
+	  -v "concat(perms,'|',//system/usermanagement/users/user[uuid=current()/userref]/name)" -n \
+	  ${OMV_CONFIG_FILE} | xmlstarlet unesc)
+
+	for privilege in ${privileges}
+	do
+                perm=''
+		perms=${privilege%|*}
+		name=${privilege#*|}
+		# Append user to list
+		case ${perms} in
+		5)
+			perm='r';;
+		7)
+			perm='rw';;
+		esac
+                echo "${name} = ${perm}" >>${OMV_SUBVERSION_AUTHZ}
+	done
+
+	# Get repository group privileges
+	privileges=$(xmlstarlet sel -t -m "//services/subversion/repos/repo[uuid='${reporef}']/privileges/privilege[groupref]" \
+	  -v "concat(perms,'|',//system/usermanagement/groups/group[uuid=current()/groupref]/name)" -n \
+	  ${OMV_CONFIG_FILE} | xmlstarlet unesc)
+
+        for privilege in ${privileges}
+        do
+                perm=''
+                perms=${privilege%|*}
+                name=${privilege#*|}
+                # Append user to list
+                case ${perms} in
+                5)
+                        perm='r';;
+                7)
+                        perm='rw';;
+                esac
+                echo "@${name} = ${perm}" >>${OMV_SUBVERSION_AUTHZ}
+        done
+
+	index=$(( ${index} - 1 ))
+done
+exit 0

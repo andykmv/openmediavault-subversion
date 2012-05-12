@@ -1,0 +1,67 @@
+openmediavault-subversion (0.3) unstable; urgency=low
+
+  * OMV 0.3 Port
+
+ -- Marcel Beck <marcel.beck@mbeck.org>  Sat, 12 May 2012 17:52:07 +0200
+
+openmediavault-subversion (0.2) unstable; urgency=low
+
+  * Initial Import from http://code.google.com/p/omv-plugins
+
+ -- Marcel Beck <marcel.beck@mbeck.org>  Sat, 12 May 2012 17:42:45 +0200
+
+openmediavault-subversion (0.1.7) unstable; urgency=low
+
+  * Fixed error when removing repository.
+  	http://code.google.com/p/omv-plugins/issues/detail?id=32
+  
+ -- Ian Moore <imooreyahoo@gmail.com>  Tue, 28 Feb 2012 09:30:50 -0500
+
+openmediavault-subversion (0.1.6) unstable; urgency=low
+
+  * Added donation link.
+  
+ -- Ian Moore <imooreyahoo@gmail.com>  Wed, 11 Jan 2012 13:04:24 -0500
+ 
+openmediavault-subversion (0.1.5) unstable; urgency=low
+
+  * Fixed JavaScript errors that would display under some conditions.
+  * Updated for compatibility with OMV apache config changes.
+
+ -- Ian Moore <imooreyahoo@gmail.com>  Tue, 03 Jan 2012 16:16:47 -0500
+
+
+openmediavault-subversion (0.1.4) unstable; urgency=low
+
+  * Updated for compatibility with OMV backend changes.
+
+ -- Ian Moore <imooreyahoo@gmail.com>  Fri, 09 Dec 2011 16:33:03 -0500
+ 
+openmediavault-subversion (0.1.3) unstable; urgency=low
+
+  * Removing repositories actually deletes repository folder.
+
+ -- Ian Moore <imooreyahoo@gmail.com>  Mon, 07 Nov 2011 08:49:21 -0500
+
+openmediavault-subversion (0.1.2) unstable; urgency=low
+
+  * Fixed error when removing repositories.
+
+ -- Ian Moore <imooreyahoo@gmail.com>  Thu, 03 Nov 2011 07:55:31 -0400
+
+openmediavault-subversion (0.1.1) unstable; urgency=low
+
+  * Added sanity check to make sure repository names are unique.
+  * Added authentication requirement on all HTTP requests that
+    are not valid read requests when Require Authentication is
+    not enabled.
+  * Repositories are now listed in a web browser when navigating
+    to /svn/.
+
+ -- Ian Moore <imooreyahoo@gmail.com>  Wed, 02 Nov 2011 21:19:40 +0000
+
+openmediavault-subversion (0.1.0) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Ian Moore <imooreyahoo@gmail.com>  Thu, 27 Oct 2011 22:42:43 -0400
