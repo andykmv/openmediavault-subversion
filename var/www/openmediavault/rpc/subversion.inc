@@ -95,6 +95,10 @@ class SubversionRpc extends OMVRpc {
 				'{
 					"type":"object",
 					"properties":{
+						"start":{"type":"integer"},
+						"limit":{' . $GLOBALS['OMV_JSONSCHEMA_COUNTFIELD'] . '},
+						"sortfield":{' . $GLOBALS['OMV_JSONSCHEMA_SORTFIELD'] . '},
+						"sortdir":{' . $GLOBALS['OMV_JSONSCHEMA_SORTDIR'] . '},
 						"uuid":{' . $GLOBALS['OMV_JSONSCHEMA_UUID'] . '}
 					}
 				}'

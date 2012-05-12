@@ -140,18 +140,6 @@ Ext.extend(OMV.Module.Services.SVNSettingsPanel, OMV.FormPanelExt, {
 						width     :400
 					}
 				]
-			},
-			{
-				xtype:'fieldset',
-				title:'Donate',
-				items:[
-					{
-						html:'I develop plugins for OpenMediaVault in my spare time, free of charge. If you find this plugin useful, I ask that you please donate.'
-					},
-					{
-						html:"<div style='margin:10px'><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PPYY2F9ST2BAY' target=_blank><img src='images/donate-btn.gif' /></a></div>"
-					}
-				]
 			}
 		];
 	},
