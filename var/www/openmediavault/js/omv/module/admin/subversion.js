@@ -497,9 +497,8 @@ Ext.extend(OMV.Module.Services.SVNPrivilegesPropertyDialog, Ext.Window, {
 				remoteSort:false,
 				proxy     :new OMV.data.DataProxy({"service":"Subversion", "method":"getPrivileges", "extraParams":{ "uuid":this.uuid }}),
 				reader    :new Ext.data.JsonReader({
-					idProperty:"uuid",
+					idProperty:"name",
 					fields    :[
-						{ name:"uuid" },
 						{ name:"type" },
 						{ name:"name" },
 						{ name:"perms" }
@@ -546,8 +545,7 @@ Ext.extend(OMV.Module.Services.SVNPrivilegesPropertyDialog, Ext.Window, {
 			],
 			items  :[ this.grid ]
 		});
-		OMV.Module.Services.SVNPrivilegesPropertyDialog.superclass.
-						initComponent.apply(this, arguments);
+		OMV.Module.Services.SVNPrivilegesPropertyDialog.superclass.initComponent.apply(this, arguments);
 		// Register event handler
 		this.grid.on("cellclick", this.onCellClick, this);
 	},
@@ -602,7 +600,7 @@ Ext.extend(OMV.Module.Services.SVNPrivilegesPropertyDialog, Ext.Window, {
 					perms = 7;
 				values.privileges.push({
 					type :record.get("type"),
-					uuid :record.get("uuid"),
+					name :record.get("name"),
 					perms:perms
 				});
 			}
@@ -663,8 +661,7 @@ Ext.extend(OMV.Module.Services.SVNPrivilegesPropertyDialog, Ext.Window, {
 	 */
 	checkBoxRenderer:function (val, cell, record, row, col, store) {
 		cell.css += " x-grid3-check-col-td";
-		return '<div class="x-grid3-check-col' + ((true === val) ? '-on' : '') +
-						' x-grid3-cc-' + this.id + '">&#160;</div>';
+		return '<div class="x-grid3-check-col' + ((true === val) ? '-on' : '') + ' x-grid3-cc-' + this.id + '">&#160;</div>';
 	}
 });
 

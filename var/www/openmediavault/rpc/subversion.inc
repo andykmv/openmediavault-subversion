@@ -113,9 +113,9 @@ class SubversionRpc extends OMVRpc {
 							"items":{
 								"type":"object",
 								"properties":{
-									"uuid":{' . $GLOBALS['OMV_JSONSCHEMA_UUID'] . '},
+									"name":{"type":"string"},
 									"perms":{"type":"integer","enum":[0,5,7]},
-										"type":{"type":"string","enum":["user","group"]}
+									"type":{"type":"string","enum":["user","group"]}
 								}
 							}
 						}
@@ -470,7 +470,6 @@ class SubversionRpc extends OMVRpc {
 			$privilege = array(
 				"type"  => "user",
 				"name"  => $userv['name'],
-				"uuid"  => $userv['uuid'],
 				"perms" => NULL
 			);
 
@@ -480,7 +479,7 @@ class SubversionRpc extends OMVRpc {
 
 				foreach ($object['privileges']['privilege'] as $objprivilegev)
 				{
-					if (! array_key_exists('userref', $objprivilegev) || ($userv['uuid'] !== $objprivilegev['userref']))
+					if (! array_key_exists('username', $objprivilegev) || ($userv['name'] !== $objprivilegev['username']))
 					{
 						continue;
 					}
@@ -499,7 +498,6 @@ class SubversionRpc extends OMVRpc {
 			$privilege = array(
 				"type"  => "group",
 				"name"  => $groupv['name'],
-				"uuid"  => $groupv['uuid'],
 				"perms" => NULL
 			);
 
@@ -509,7 +507,7 @@ class SubversionRpc extends OMVRpc {
 
 				foreach ($object['privileges']['privilege'] as $objprivilegev)
 				{
-					if (! array_key_exists('groupref', $objprivilegev) || ($groupv['uuid'] !== $objprivilegev['groupref']))
+					if (! array_key_exists('groupname', $objprivilegev) || ($groupv['name'] !== $objprivilegev['groupname']))
 					{
 						continue;
 					}
@@ -558,7 +556,7 @@ class SubversionRpc extends OMVRpc {
 				case "user":
 
 					// Check if user exists.
-					$userObj = $this->configGet(sprintf("//system/usermanagement/users/user[uuid='%s']", $datav['uuid']));
+					$userObj = $this->configGet(sprintf("//system/usermanagement/users/user[name='%s']", $datav['username']));
 
 					// Is user allowed? It does not make sense to give the WebGUI
 					// administrator permissions for a repository.
@@ -567,14 +565,14 @@ class SubversionRpc extends OMVRpc {
 					{
 						throw new OMVException(OMVErrorMsg::E_CONFIG_OBJECT_INVALID, sprintf(gettext("The user '%s' is not allowed"), $userObj['name']));
 					}
-					$privilege['userref'] = $datav['uuid'];
+					$privilege['username'] = $datav['name'];
 					break;
 
 				case "group":
 
 					// Check if group exists.
-					$this->configGet(sprintf("//system/usermanagement/groups/group[uuid='%s']", $datav['uuid']));
-					$privilege['groupref'] = $datav['uuid'];
+					$this->configGet(sprintf("//system/usermanagement/groups/group[name='%s']", $datav['name']));
+					$privilege['groupname'] = $datav['name'];
 					break;
 			}
 

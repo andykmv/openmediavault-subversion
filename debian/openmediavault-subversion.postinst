@@ -38,51 +38,51 @@ set -e
 
 
 case "$1" in
-    configure)
+	configure)
 
-            ########################################################################
-    				# Update file permissions.
-    				########################################################################
-    				echo "Updating permissions"
-    				omv_install_fixperms
+		########################################################################
+		# Update file permissions.
+		########################################################################
+		echo "Updating permissions"
+		omv_install_fixperms
 
-    				########################################################################
-    				# Install locale files.
-    				########################################################################
-    				echo "Install locale files ..."
-    				omv_install_locale
+		########################################################################
+		# Install locale files.
+		########################################################################
+		echo "Install locale files ..."
+		omv_install_locale
 
-	# Enable required apache modules
-	a2enmod authnz_external dav_svn
+		# Enable required apache modules
+		a2enmod authnz_external dav_svn
 
-	# Check for XML config
+		# Check for XML config
     if ! omv_config_exists "//services/subversion"; then
-		omv_config_add_element "//services" "subversion" ""
-		omv_config_add_element "//services/subversion" "enable" "0"
-		omv_config_add_element "//services/subversion" "require-auth" "1"
-		omv_config_add_element "//services/subversion" "realm" "Subversion Repositories on OMV"
-		omv_config_add_element "//services/subversion" "repository-root" ""
-		omv_config_add_element "//services/subversion" "repos" ""
-	fi
+			omv_config_add_element "//services" "subversion" ""
+			omv_config_add_element "//services/subversion" "enable" "0"
+			omv_config_add_element "//services/subversion" "require-auth" "1"
+			omv_config_add_element "//services/subversion" "realm" "Subversion Repositories on OMV"
+			omv_config_add_element "//services/subversion" "repository-root" ""
+			omv_config_add_element "//services/subversion" "repos" ""
+		fi
 	
-	# Clean up old installation?
-	if [ -f /etc/apache2/conf.d/omv-svn ]; then
+		# Clean up old installation?
+		if [ -f /etc/apache2/conf.d/omv-svn ]; then
+
+			/bin/rm -f /etc/apache2/conf.d/omv-svn
+			omv-mkconf subversion
+		fi
 	
-		/bin/rm -f /etc/apache2/conf.d/omv-svn
-		omv-mkconf subversion
-	fi
-	
-	monit restart apache2
+		monit restart apache2
 
-    ;;
+	;;
 
-    abort-upgrade|abort-remove|abort-deconfigure)
-    ;;
+	abort-upgrade|abort-remove|abort-deconfigure)
+	;;
 
-    *)
-        echo "postinst called with unknown argument \`$1'" >&2
-        exit 1
-    ;;
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+	;;
 esac
 
 # dh_installdeb will replace this with shell code automatically
