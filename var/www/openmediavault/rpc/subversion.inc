@@ -556,7 +556,7 @@ class SubversionRpc extends OMVRpc {
 				case "user":
 
 					// Check if user exists.
-					$userObj = $this->configGet(sprintf("//system/usermanagement/users/user[name='%s']", $datav['username']));
+					$userObj = $this->configGet(sprintf("//system/usermanagement/users/user[name='%s']", $datav['name']));
 
 					// Is user allowed? It does not make sense to give the WebGUI
 					// administrator permissions for a repository.
