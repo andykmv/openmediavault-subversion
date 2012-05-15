@@ -56,7 +56,7 @@ case "$1" in
 		a2enmod authnz_external dav_svn
 
 		# Check for XML config
-    if ! omv_config_exists "//services/subversion"; then
+		if ! omv_config_exists "//services/subversion"; then
 			omv_config_add_element "//services" "subversion" ""
 			omv_config_add_element "//services/subversion" "enable" "0"
 			omv_config_add_element "//services/subversion" "require-auth" "1"
@@ -64,6 +64,44 @@ case "$1" in
 			omv_config_add_element "//services/subversion" "repository-root" ""
 			omv_config_add_element "//services/subversion" "repos" ""
 		fi
+		
+		index=$(omv_config_get_count "//services/subversion/repos/repo")
+		while [ ${index} -gt 0 ]
+		do
+			reporef=$(omv_config_get "//services/subversion/repos/repo[position()=${index}]/uuid")
+			
+			privileges_index=$(omv_config_get_count "//services/subversion/repos/repo[uuid='${reporef}']/privileges/privilege")
+			while [ ${privileges_index} -gt 0 ]
+			do
+				USERUUID="$(omv_config_get "//services/subversion/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/userref")"
+				if [ "${USERUUID}" != "" ]; then
+					if omv_isuuid "${USERUUID}"; then
+						USERNAME=$(omv_config_get "//system/usermanagement/users/user[uuid='${USERUUID}']/name")
+						if ! omv_config_exists "//services/subversion/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/username"; then
+							echo "Transform User UUID: ${USERUUID} to Username: ${USERNAME}"
+							omv_config_add_element "//services/subversion/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]" "username" "${USERNAME}"
+							omv_config_delete "//services/subversion/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/userref"
+						fi
+					fi
+				fi
+				
+				GROUPUUID="$(omv_config_get "//services/subversion/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/groupref")"
+				if [ "${GROUPUUID}" != "" ]; then
+					if omv_isuuid "${GROUPUUID}"; then						
+						GROUPNAME=$(omv_config_get "//system/usermanagement/groups/group[uuid='${GROUPUUID}']/name")
+						if ! omv_config_exists "//services/subversion/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/groupname"; then
+							echo "Transform Group UUID: ${GROUPUUID} to Groupname: ${GROUPNAME}"
+							omv_config_add_element "//services/subversion/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]" "groupname" "${GROUPNAME}"
+							omv_config_delete "//services/subversion/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/groupref"
+						fi
+					fi
+				fi
+				
+				privileges_index=$(( ${privileges_index} - 1 ))
+			done
+			
+			index=$(( ${index} - 1 ))
+		done
 	
 		# Clean up old installation?
 		if [ -f /etc/apache2/conf.d/omv-svn ]; then
