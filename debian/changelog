@@ -1,3 +1,11 @@
+openmediavault-subversion (0.3.1) unstable; urgency=low
+
+  * Github Issue Fix #1 - Import old user privileges
+  * Various fixes
+
+ -- Marcel Beck <marcel.beck@mbeck.org>  Wed, 23 May 2012 18:47:14 +0200
+
+
 openmediavault-subversion (0.3) unstable; urgency=low
 
   * OMV 0.3 Port
