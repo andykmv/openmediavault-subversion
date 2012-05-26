@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Raul Fernandez Garcia <raulfg3@gmail.com>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: OMV Plugins\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-26 10:03+0200\n"
+"PO-Revision-Date: 2012-05-14 20:42+0000\n"
+"Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>\n"
+"Language-Team: Spanish (Spain) (http://www.transifex.net/projects/p/OMVPlugins/language/es_ES/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+msgid "Add repository"
+msgstr "Añadir repositorio"
+
+msgid "Authentication realm."
+msgstr "Autenticación de dominio."
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Default privilege level"
+msgstr "Nivel por defecto de privilegios"
+
+msgid "Default privileges"
+msgstr "Privilegios por defecto"
+
+msgid "Description"
+msgstr "Descripción"
+
+msgid "Edit repository"
+msgstr "Editar repositorio"
+
+msgid "Edit repository privileges"
+msgstr "Editar privilegios del repositorio"
+
+msgid "Enable"
+msgstr "Habilitar"
+
+msgid "General settings"
+msgstr "Opciones generales"
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "No access"
+msgstr "Sin acceso"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Path"
+msgstr "Ruta"
+
+msgid "Privileges"
+msgstr "Privilegios"
+
+msgid "Read / Write"
+msgstr "Lectura/Escritura"
+
+msgid "Read-only"
+msgstr "Solo-Lectura"
+
+msgid "Realm Name"
+msgstr "Nombre Real"
+
+msgid "Repositories"
+msgstr "Repositorios"
+
+msgid "Repository Root"
+msgstr "Raíz de repositorios"
+
+msgid "Repository Volume"
+msgstr "Volumen de repositorios"
+
+msgid "Repository name."
+msgstr "Nombre del repositorio"
+
+msgid "Require authentication"
+msgstr "Autenticación requerida"
+
+msgid "Saving ..."
+msgstr "Salvando ..."
+
+msgid "Select a volume ..."
+msgstr "Seleccionar un volumen ..."
+
+msgid "Settings"
+msgstr "Opciones"
+
+msgid "Subversion"
+msgstr "Subversion"
+
+msgid "Subversion Repository on Open Media Vault"
+msgstr "Repositorio subversion de Open Media Vault"
+
+msgid "Subversion Web Service"
+msgstr "Servicio Web Subversion"
+
+#, c-format
+msgid "The user '%s' is not allowed"
+msgstr "El usuario '%s' no está permitido"
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "URL"
+msgstr "URL"
+
+msgid ""
+"Uncheck to allow anonymous access to one or more repositories.<br "
+"/>Permissions can be further restricted per repository."
+msgstr "Deshabilitar para permitir el acceso anonimo a uno o más repositorioss.<br />Los permisos pueden ser restringidos para cada repositorio."
