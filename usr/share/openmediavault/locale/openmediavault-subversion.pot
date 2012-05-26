@@ -1,118 +1,120 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: openmediavault-subversion\n"
+"Project-Id-Version: OMV Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-26 10:03+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2012-05-12 16:30+0000\n"
+"Last-Translator: Marcel Beck <fo3nik5@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Add repository"
-msgstr ""
+msgstr "Add repository"
 
 msgid "Authentication realm."
-msgstr ""
+msgstr "Authentication realm."
 
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 msgid "Default privilege level"
-msgstr ""
+msgstr "Default privilege level"
 
 msgid "Default privileges"
-msgstr ""
+msgstr "Default privileges"
 
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 msgid "Edit repository"
-msgstr ""
+msgstr "Edit repository"
 
 msgid "Edit repository privileges"
-msgstr ""
+msgstr "Edit repository privileges"
 
 msgid "Enable"
-msgstr ""
+msgstr "Enable"
 
 msgid "General settings"
-msgstr ""
+msgstr "General settings"
 
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 msgid "No access"
-msgstr ""
+msgstr "No access"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Path"
-msgstr ""
+msgstr "Path"
 
 msgid "Privileges"
-msgstr ""
+msgstr "Privileges"
 
 msgid "Read / Write"
-msgstr ""
+msgstr "Read / Write"
 
 msgid "Read-only"
-msgstr ""
+msgstr "Read-only"
 
 msgid "Realm Name"
-msgstr ""
+msgstr "Realm Name"
 
 msgid "Repositories"
-msgstr ""
+msgstr "Repositories"
 
 msgid "Repository Root"
-msgstr ""
+msgstr "Repository Root"
 
 msgid "Repository Volume"
-msgstr ""
+msgstr "Repository Volume"
 
 msgid "Repository name."
-msgstr ""
+msgstr "Repository name."
 
 msgid "Require authentication"
-msgstr ""
+msgstr "Require authentication"
 
 msgid "Saving ..."
-msgstr ""
+msgstr "Saving ..."
 
 msgid "Select a volume ..."
-msgstr ""
+msgstr "Select a volume ..."
 
 msgid "Settings"
-msgstr ""
+msgstr "Settings"
 
 msgid "Subversion"
-msgstr ""
+msgstr "Subversion"
 
 msgid "Subversion Repository on Open Media Vault"
-msgstr ""
+msgstr "Subversion Repository on Open Media Vault"
 
 msgid "Subversion Web Service"
-msgstr ""
+msgstr "Subversion Web Service"
 
 #, c-format
 msgid "The user '%s' is not allowed"
-msgstr ""
+msgstr "The user '%s' is not allowed"
 
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
-msgid "Uncheck to allow anonymous access to one or more repositories.<br />Permissions can be further restricted per repository."
-msgstr ""
+msgid ""
+"Uncheck to allow anonymous access to one or more repositories.<br "
+"/>Permissions can be further restricted per repository."
+msgstr "Uncheck to allow anonymous access to one or more repositories.<br />Permissions can be further restricted per repository."
