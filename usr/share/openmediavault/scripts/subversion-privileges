@@ -93,8 +93,8 @@ do
 	echo "* = ${priv}" >>${OMV_SUBVERSION_AUTHZ}
 
 	# Get repository user privileges
-	privileges=$(xmlstarlet sel -t -m "//services/subversion/repos/repo[uuid='${reporef}']/privileges/privilege[userref]" \
-	  -v "concat(perms,'|',//system/usermanagement/users/user[uuid=current()/userref]/name)" -n \
+	privileges=$(xmlstarlet sel -t -m "//services/subversion/repos/repo[uuid='${reporef}']/privileges/privilege[username]" \
+	  -v "concat(perms,'|',//system/usermanagement/users/user[uuid=current()/username]/name)" -n \
 	  ${OMV_CONFIG_FILE} | xmlstarlet unesc)
 
 	for privilege in ${privileges}
@@ -113,8 +113,8 @@ do
 	done
 
 	# Get repository group privileges
-	privileges=$(xmlstarlet sel -t -m "//services/subversion/repos/repo[uuid='${reporef}']/privileges/privilege[groupref]" \
-	  -v "concat(perms,'|',//system/usermanagement/groups/group[uuid=current()/groupref]/name)" -n \
+	privileges=$(xmlstarlet sel -t -m "//services/subversion/repos/repo[uuid='${reporef}']/privileges/privilege[groupname]" \
+	  -v "concat(perms,'|',//system/usermanagement/groups/group[uuid=current()/groupname]/name)" -n \
 	  ${OMV_CONFIG_FILE} | xmlstarlet unesc)
 
         for privilege in ${privileges}
