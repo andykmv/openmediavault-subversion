@@ -94,7 +94,7 @@ do
 
 	# Get repository user privileges
 	privileges=$(xmlstarlet sel -t -m "//services/subversion/repos/repo[uuid='${reporef}']/privileges/privilege[username]" \
-	  -v "concat(perms,'|',//system/usermanagement/users/user[uuid=current()/username]/name)" -n \
+	  -v "concat(perms,'|',//system/usermanagement/users/user[name=current()/username]/name)" -n \
 	  ${OMV_CONFIG_FILE} | xmlstarlet unesc)
 
 	for privilege in ${privileges}
@@ -114,7 +114,7 @@ do
 
 	# Get repository group privileges
 	privileges=$(xmlstarlet sel -t -m "//services/subversion/repos/repo[uuid='${reporef}']/privileges/privilege[groupname]" \
-	  -v "concat(perms,'|',//system/usermanagement/groups/group[uuid=current()/groupname]/name)" -n \
+	  -v "concat(perms,'|',//system/usermanagement/groups/group[name=current()/groupname]/name)" -n \
 	  ${OMV_CONFIG_FILE} | xmlstarlet unesc)
 
         for privilege in ${privileges}
