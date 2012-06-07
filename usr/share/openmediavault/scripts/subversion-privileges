@@ -2,7 +2,9 @@
 #
 # @license		http://www.gnu.org/licenses/gpl.html GPL Version 3
 # @author		Ian Moore <imooreyahoo@gmail.com>
+# @author		Marcel Beck <marcel.beck@mbeck.org>
 # @copyright	Copyright (c) 2011-2012 Ian Moore
+# @copyright	Copyright (c) 2012 Marcel Beck
 #
 # This file is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -91,8 +93,8 @@ do
 	echo "* = ${priv}" >>${OMV_SUBVERSION_AUTHZ}
 
 	# Get repository user privileges
-	privileges=$(xmlstarlet sel -t -m "//services/subversion/repos/repo[uuid='${reporef}']/privileges/privilege[userref]" \
-	  -v "concat(perms,'|',//system/usermanagement/users/user[uuid=current()/userref]/name)" -n \
+	privileges=$(xmlstarlet sel -t -m "//services/subversion/repos/repo[uuid='${reporef}']/privileges/privilege[username]" \
+	  -v "concat(perms,'|',//system/usermanagement/users/user[name=current()/username]/name)" -n \
 	  ${OMV_CONFIG_FILE} | xmlstarlet unesc)
 
 	for privilege in ${privileges}
@@ -111,8 +113,8 @@ do
 	done
 
 	# Get repository group privileges
-	privileges=$(xmlstarlet sel -t -m "//services/subversion/repos/repo[uuid='${reporef}']/privileges/privilege[groupref]" \
-	  -v "concat(perms,'|',//system/usermanagement/groups/group[uuid=current()/groupref]/name)" -n \
+	privileges=$(xmlstarlet sel -t -m "//services/subversion/repos/repo[uuid='${reporef}']/privileges/privilege[groupname]" \
+	  -v "concat(perms,'|',//system/usermanagement/groups/group[name=current()/groupname]/name)" -n \
 	  ${OMV_CONFIG_FILE} | xmlstarlet unesc)
 
         for privilege in ${privileges}

@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: OMV Plugins\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 19:25+0200\n"
+"PO-Revision-Date: 2012-05-12 16:30+0000\n"
+"Last-Translator: Marcel Beck <fo3nik5@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+msgid "Add repository"
+msgstr "Add repository"
+
+msgid "Authentication realm."
+msgstr "Authentication realm."
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Default privilege level"
+msgstr "Default privilege level"
+
+msgid "Default privileges"
+msgstr "Default privileges"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Edit repository"
+msgstr "Edit repository"
+
+msgid "Edit repository privileges"
+msgstr "Edit repository privileges"
+
+msgid "Enable"
+msgstr "Enable"
+
+msgid "General settings"
+msgstr "General settings"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "No access"
+msgstr "No access"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Path"
+msgstr "Path"
+
+msgid "Privileges"
+msgstr "Privileges"
+
+msgid "Read / Write"
+msgstr "Read / Write"
+
+msgid "Read-only"
+msgstr "Read-only"
+
+msgid "Realm Name"
+msgstr "Realm Name"
+
+msgid "Repositories"
+msgstr "Repositories"
+
+msgid "Repository Root"
+msgstr "Repository Root"
+
+msgid "Repository Volume"
+msgstr "Repository Volume"
+
+msgid "Repository name."
+msgstr "Repository name."
+
+msgid "Require authentication"
+msgstr "Require authentication"
+
+msgid "Saving ..."
+msgstr "Saving ..."
+
+msgid "Select a volume ..."
+msgstr "Select a volume ..."
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Subversion"
+msgstr "Subversion"
+
+msgid "Subversion Repository on Open Media Vault"
+msgstr "Subversion Repository on Open Media Vault"
+
+msgid "Subversion Web Service"
+msgstr "Subversion Web Service"
+
+#, c-format
+msgid "The user '%s' is not allowed"
+msgstr "The user '%s' is not allowed"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "URL"
+msgstr "URL"
+
+msgid ""
+"Uncheck to allow anonymous access to one or more repositories.<br "
+"/>Permissions can be further restricted per repository."
+msgstr "Uncheck to allow anonymous access to one or more repositories.<br />Permissions can be further restricted per repository."

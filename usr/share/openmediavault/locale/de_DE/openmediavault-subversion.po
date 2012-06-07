@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: OMV Plugins\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 19:25+0200\n"
+"PO-Revision-Date: 2012-05-12 16:30+0000\n"
+"Last-Translator: Marcel Beck <fo3nik5@gmail.com>\n"
+"Language-Team: German (http://www.transifex.net/projects/p/OMVPlugins/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+msgid "Add repository"
+msgstr ""
+
+msgid "Authentication realm."
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Default privilege level"
+msgstr ""
+
+msgid "Default privileges"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Edit repository"
+msgstr ""
+
+msgid "Edit repository privileges"
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "General settings"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "No access"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Path"
+msgstr ""
+
+msgid "Privileges"
+msgstr ""
+
+msgid "Read / Write"
+msgstr ""
+
+msgid "Read-only"
+msgstr ""
+
+msgid "Realm Name"
+msgstr ""
+
+msgid "Repositories"
+msgstr ""
+
+msgid "Repository Root"
+msgstr ""
+
+msgid "Repository Volume"
+msgstr ""
+
+msgid "Repository name."
+msgstr ""
+
+msgid "Require authentication"
+msgstr ""
+
+msgid "Saving ..."
+msgstr ""
+
+msgid "Select a volume ..."
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Subversion"
+msgstr ""
+
+msgid "Subversion Repository on Open Media Vault"
+msgstr ""
+
+msgid "Subversion Web Service"
+msgstr ""
+
+#, c-format
+msgid "The user '%s' is not allowed"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "URL"
+msgstr ""
+
+msgid ""
+"Uncheck to allow anonymous access to one or more repositories.<br "
+"/>Permissions can be further restricted per repository."
+msgstr ""

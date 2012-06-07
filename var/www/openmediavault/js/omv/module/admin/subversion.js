@@ -34,7 +34,7 @@ Ext.ns("OMV.Module.Services");
 
 // Register the menu.
 OMV.NavigationPanelMgr.registerMenu("services", "subversion", {
-	text:"Subversion",
+	text:_("Subversion"),
 	icon:"images/subversion.png"
 });
 
@@ -56,7 +56,7 @@ Ext.extend(OMV.Module.Services.SVNSettingsPanel, OMV.FormPanelExt, {
 
 			// Disable repos tab?
 			var checked = this.findFormField("enable").checked;
-			var rp = this.ownerCt.find('title', 'Repositories');
+			var rp = this.ownerCt.find('title', _('Repositories'));
 			if (rp.length > 0)
 				(checked ? rp[0].enable() : rp[0].disable());
 
@@ -69,7 +69,7 @@ Ext.extend(OMV.Module.Services.SVNSettingsPanel, OMV.FormPanelExt, {
 		return [
 			{
 				xtype   :"fieldset",
-				title   :"General settings",
+				title   :_("General settings"),
 				defaults:{
 					labelSeparator:""
 				},
@@ -77,7 +77,7 @@ Ext.extend(OMV.Module.Services.SVNSettingsPanel, OMV.FormPanelExt, {
 					{
 						xtype     :"checkbox",
 						name      :"enable",
-						fieldLabel:"Enable",
+						fieldLabel:_("Enable"),
 						checked   :false,
 						inputValue:1,
 						listeners :{
@@ -88,28 +88,28 @@ Ext.extend(OMV.Module.Services.SVNSettingsPanel, OMV.FormPanelExt, {
 					{
 						xtype     :"textfield",
 						name      :"realm",
-						fieldLabel:"Realm Name",
+						fieldLabel:_("Realm Name"),
 						allowBlank:false,
 						width     :300,
 						plugins   :[ OMV.form.plugins.FieldInfo ],
-						infoText  :"Authentication realm.",
-						value     :"Subversion Repository on Open Media Vault"
+						infoText  :_("Authentication realm."),
+						value     :_("Subversion Repository on Open Media Vault")
 					},
 					{
 						xtype     :"checkbox",
 						name      :"require-auth",
-						fieldLabel:"Require authentication",
+						fieldLabel:_("Require authentication"),
 						checked   :true,
 						inputValue:1,
 						plugins   :[ OMV.form.plugins.FieldInfo ],
-						infoText  :"Uncheck to allow anonymous access to one or more repositories.<br />Permissions can be further restricted per repository."
+						infoText  :_("Uncheck to allow anonymous access to one or more repositories.<br />Permissions can be further restricted per repository.")
 					},
 					{
 						xtype        :"combo",
 						name         :"mntentref",
 						hiddenName   :"mntentref",
-						fieldLabel   :"Repository Volume",
-						emptyText    :"Select a volume ...",
+						fieldLabel   :_("Repository Volume"),
+						emptyText    :_("Select a volume ..."),
 						allowBlank   :false,
 						allowNone    :false,
 						width        :400,
@@ -133,23 +133,11 @@ Ext.extend(OMV.Module.Services.SVNSettingsPanel, OMV.FormPanelExt, {
 						xtype     :"label",
 						name      :"repository-root",
 						id        :'OMV.Module.Services.SVNSettingsPanel-repo-root',
-						fieldLabel:"Repository Root",
+						fieldLabel:_("Repository Root"),
 						allowNone :true,
 						readOnly  :true,
 						hiddenName:"repository-root",
 						width     :400
-					}
-				]
-			},
-			{
-				xtype:'fieldset',
-				title:'Donate',
-				items:[
-					{
-						html:'I develop plugins for OpenMediaVault in my spare time, free of charge. If you find this plugin useful, I ask that you please donate.'
-					},
-					{
-						html:"<div style='margin:10px'><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PPYY2F9ST2BAY' target=_blank><img src='images/donate-btn.gif' /></a></div>"
 					}
 				]
 			}
@@ -182,33 +170,33 @@ OMV.Module.Services.SVNReposGridPanel = function (config) {
 		colModel         :new Ext.grid.ColumnModel({
 			columns:[
 				{
-					header   :"Name",
+					header   :_("Name"),
 					sortable :true,
 					dataIndex:"name",
 					id       :"name"
 				},
 				{
-					header   :"Default privilege level",
+					header   :_("Default privilege level"),
 					sortable :true,
 					dataIndex:"default-access",
 					id       :"default-access",
 					renderer :this.prvRenderer
 				},
 				{
-					header   :"Description",
+					header   :_("Description"),
 					sortable :true,
 					dataIndex:"comment",
 					id       :"comment"
 				},
 				{
-					header   :"URL",
+					header   :_("URL"),
 					sortable :true,
 					dataIndex:"name",
 					id       :"url",
 					renderer :this.urlRenderer
 				},
 				{
-					header   :"Path",
+					header   :_("Path"),
 					sortable :true,
 					dataIndex:"path",
 					id       :"path"
@@ -248,7 +236,7 @@ Ext.extend(OMV.Module.Services.SVNReposGridPanel, OMV.grid.TBarGridPanel, {
 		tbar.insert(2, {
 			id      :this.getId() + "-privileges",
 			xtype   :"button",
-			text    :"Privileges",
+			text    :_("Privileges"),
 			icon    :"images/privileges.gif",
 			handler :this.cbPrivilegesBtnHdl.createDelegate(this),
 			disabled:true
@@ -266,13 +254,13 @@ Ext.extend(OMV.Module.Services.SVNReposGridPanel, OMV.grid.TBarGridPanel, {
 	prvRenderer:function (val, cell, record, row, col, store) {
 		switch (val) {
 			case "read-only":
-				val = "Read-only";
+				val = _("Read-only");
 				break;
 			case "write":
-				val = "Read / Write";
+				val = _("Read / Write");
 				break;
 			default:
-				val = "No access";
+				val = _("No access");
 		}
 		return val;
 	},
@@ -346,13 +334,13 @@ Ext.extend(OMV.Module.Services.SVNReposGridPanel, OMV.grid.TBarGridPanel, {
 OMV.NavigationPanelMgr.registerPanel("services", "subversion", {
 	cls     :OMV.Module.Services.SVNSettingsPanel,
 	position:10,
-	title   :"Settings"
+	title   :_("Settings")
 });
 
 OMV.NavigationPanelMgr.registerPanel("services", "subversion", {
 	cls     :OMV.Module.Services.SVNReposGridPanel,
 	position:20,
-	title   :"Repositories"
+	title   :_("Repositories")
 });
 
 OMV.Module.Services.SVNRepoPropertyDialog = function (config) {
@@ -360,7 +348,7 @@ OMV.Module.Services.SVNRepoPropertyDialog = function (config) {
 		rpcService  :"subversion",
 		rpcGetMethod:"getRepo",
 		rpcSetMethod:"setRepo",
-		title       :((config.uuid == OMV.UUID_UNDEFINED) ? "Add repository" : "Edit repository"),
+		title       :((config.uuid == OMV.UUID_UNDEFINED) ? _("Add repository") : _("Edit repository")),
 		autoHeight  :true
 	};
 	Ext.apply(initialConfig, config);
@@ -384,28 +372,28 @@ Ext.extend(OMV.Module.Services.SVNRepoPropertyDialog, OMV.CfgObjectDialog, {
 			{
 				xtype     :"textfield",
 				name      :"name",
-				fieldLabel:"Name",
+				fieldLabel:_("Name"),
 				plugins   :[ OMV.form.plugins.FieldInfo ],
-				infoText  :"Repository name.",
+				infoText  :_("Repository name."),
 				allowBlank:false
 			},
 			{
 				xtype     :"textfield",
 				name      :"comment",
-				fieldLabel:"Description",
+				fieldLabel:_("Description"),
 				allowBlank:false
 			},
 			{
 				xtype        :"combo",
 				name         :"default-access",
-				fieldLabel   :"Default privileges",
+				fieldLabel   :_("Default privileges"),
 				mode         :"local",
 				store        :new Ext.data.SimpleStore({
 					fields:[ "value", "text" ],
 					data  :[
-						[ "none", "No access" ],
-						[ "read-only", "Read-only" ],
-						[ "write", "Read / Write" ]
+						[ "none", _("No access") ],
+						[ "read-only", _("Read-only") ],
+						[ "write", _("Read / Write") ]
 					]
 				}),
 				displayField :"text",
@@ -437,7 +425,7 @@ Ext.extend(OMV.Module.Services.SVNRepoPropertyDialog, OMV.CfgObjectDialog, {
  */
 OMV.Module.Services.SVNPrivilegesPropertyDialog = function (config) {
 	var initialConfig = {
-		title      :"Edit repository privileges",
+		title      :_("Edit repository privileges"),
 		width      :500,
 		height     :300,
 		layout     :"fit",
@@ -463,7 +451,7 @@ Ext.extend(OMV.Module.Services.SVNPrivilegesPropertyDialog, Ext.Window, {
 			colModel    :new Ext.grid.ColumnModel({
 				columns:[
 					{
-						header   :"Type",
+						header   :_("Type"),
 						sortable :true,
 						dataIndex:"type",
 						id       :"type",
@@ -473,13 +461,13 @@ Ext.extend(OMV.Module.Services.SVNPrivilegesPropertyDialog, Ext.Window, {
 						scope    :this
 					},
 					{
-						header   :"Name",
+						header   :_("Name"),
 						sortable :true,
 						dataIndex:"name",
 						id       :"name"
 					},
 					{
-						header   :"Read / Write",
+						header   :_("Read / Write"),
 						dataIndex:"writeable",
 						id       :"writeable",
 						align    :"center",
@@ -487,7 +475,7 @@ Ext.extend(OMV.Module.Services.SVNPrivilegesPropertyDialog, Ext.Window, {
 						scope    :this
 					},
 					{
-						header   :"Read-only",
+						header   :_("Read-only"),
 						dataIndex:"readonly",
 						id       :"readonly",
 						align    :"center",
@@ -495,7 +483,7 @@ Ext.extend(OMV.Module.Services.SVNPrivilegesPropertyDialog, Ext.Window, {
 						scope    :this
 					},
 					{
-						header   :"No access",
+						header   :_("No access"),
 						dataIndex:"deny",
 						id       :"deny",
 						align    :"center",
@@ -509,9 +497,8 @@ Ext.extend(OMV.Module.Services.SVNPrivilegesPropertyDialog, Ext.Window, {
 				remoteSort:false,
 				proxy     :new OMV.data.DataProxy({"service":"Subversion", "method":"getPrivileges", "extraParams":{ "uuid":this.uuid }}),
 				reader    :new Ext.data.JsonReader({
-					idProperty:"uuid",
+					idProperty:"name",
 					fields    :[
-						{ name:"uuid" },
 						{ name:"type" },
 						{ name:"name" },
 						{ name:"perms" }
@@ -546,20 +533,19 @@ Ext.extend(OMV.Module.Services.SVNPrivilegesPropertyDialog, Ext.Window, {
 		Ext.apply(this, {
 			buttons:[
 				{
-					text   :"OK",
+					text   :_("OK"),
 					handler:this.cbOkBtnHdl,
 					scope  :this
 				},
 				{
-					text   :"Cancel",
+					text   :_("Cancel"),
 					handler:this.cbCancelBtnHdl,
 					scope  :this
 				}
 			],
 			items  :[ this.grid ]
 		});
-		OMV.Module.Services.SVNPrivilegesPropertyDialog.superclass.
-						initComponent.apply(this, arguments);
+		OMV.Module.Services.SVNPrivilegesPropertyDialog.superclass.initComponent.apply(this, arguments);
 		// Register event handler
 		this.grid.on("cellclick", this.onCellClick, this);
 	},
@@ -595,7 +581,7 @@ Ext.extend(OMV.Module.Services.SVNPrivilegesPropertyDialog, Ext.Window, {
 
 	doSubmit:function () {
 		// Display waiting dialog
-		OMV.MessageBox.wait(null, "Saving ...");
+		OMV.MessageBox.wait(null, _("Saving ..."));
 		// Prepare RPC content
 		var records = this.grid.store.getRange();
 		var values = {
@@ -614,7 +600,7 @@ Ext.extend(OMV.Module.Services.SVNPrivilegesPropertyDialog, Ext.Window, {
 					perms = 7;
 				values.privileges.push({
 					type :record.get("type"),
-					uuid :record.get("uuid"),
+					name :record.get("name"),
 					perms:perms
 				});
 			}
@@ -675,8 +661,7 @@ Ext.extend(OMV.Module.Services.SVNPrivilegesPropertyDialog, Ext.Window, {
 	 */
 	checkBoxRenderer:function (val, cell, record, row, col, store) {
 		cell.css += " x-grid3-check-col-td";
-		return '<div class="x-grid3-check-col' + ((true === val) ? '-on' : '') +
-						' x-grid3-cc-' + this.id + '">&#160;</div>';
+		return '<div class="x-grid3-check-col' + ((true === val) ? '-on' : '') + ' x-grid3-cc-' + this.id + '">&#160;</div>';
 	}
 });
 
