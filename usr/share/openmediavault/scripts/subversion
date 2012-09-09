@@ -66,7 +66,7 @@ fi
 xmlstarlet sel -t -m "//services/subversion" \
   -o "AuthzSVNAccessFile /etc/subversion/authz" -n \
   -v "concat('   SVNParentPath ',repository-root)" -n \
-  -v "concat('   AuthName &quot;',realm,'&quot;')" -n \
+  -v "concat('   AuthName \"',realm,'\"')" -n \
   -o "&lt;/Location&gt;" -n \
   ${OMV_CONFIG_FILE} | xmlstarlet unesc >> ${OMV_SUBVERSION_CONFIG}
 

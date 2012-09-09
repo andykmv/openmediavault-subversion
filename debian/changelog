@@ -1,3 +1,9 @@
+openmediavault-subversion (0.4) stable; urgency=low
+
+  * Upgrade to xmlstarlet 1.3.1.
+
+ -- Marcel Beck <marcel.beck@mbeck.org>  Sun, 09 Sep 2012 10:27:26 +0200
+
 openmediavault-subversion (0.3.3) unstable; urgency=low
 
   * Update locale
@@ -34,15 +40,15 @@ openmediavault-subversion (0.1.7) unstable; urgency=low
 
   * Fixed error when removing repository.
   	http://code.google.com/p/omv-plugins/issues/detail?id=32
-  
+
  -- Ian Moore <imooreyahoo@gmail.com>  Tue, 28 Feb 2012 09:30:50 -0500
 
 openmediavault-subversion (0.1.6) unstable; urgency=low
 
   * Added donation link.
-  
+
  -- Ian Moore <imooreyahoo@gmail.com>  Wed, 11 Jan 2012 13:04:24 -0500
- 
+
 openmediavault-subversion (0.1.5) unstable; urgency=low
 
   * Fixed JavaScript errors that would display under some conditions.
@@ -56,7 +62,7 @@ openmediavault-subversion (0.1.4) unstable; urgency=low
   * Updated for compatibility with OMV backend changes.
 
  -- Ian Moore <imooreyahoo@gmail.com>  Fri, 09 Dec 2011 16:33:03 -0500
- 
+
 openmediavault-subversion (0.1.3) unstable; urgency=low
 
   * Removing repositories actually deletes repository folder.
