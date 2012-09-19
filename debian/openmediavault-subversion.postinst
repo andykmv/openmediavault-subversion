@@ -39,19 +39,6 @@ set -e
 
 case "$1" in
 	configure)
-
-		########################################################################
-		# Update file permissions.
-		########################################################################
-		echo "Updating permissions"
-		omv_install_fixperms
-
-		########################################################################
-		# Install locale files.
-		########################################################################
-		echo "Install locale files ..."
-		omv_install_locale
-
 		# Enable required apache modules
 		a2enmod authnz_external dav_svn
 
@@ -64,12 +51,12 @@ case "$1" in
 			omv_config_add_element "//services/subversion" "repository-root" ""
 			omv_config_add_element "//services/subversion" "repos" ""
 		fi
-		
+
 		index=$(omv_config_get_count "//services/subversion/repos/repo")
 		while [ ${index} -gt 0 ]
 		do
 			reporef=$(omv_config_get "//services/subversion/repos/repo[position()=${index}]/uuid")
-			
+
 			privileges_index=$(omv_config_get_count "//services/subversion/repos/repo[uuid='${reporef}']/privileges/privilege")
 			while [ ${privileges_index} -gt 0 ]
 			do
@@ -84,10 +71,10 @@ case "$1" in
 						fi
 					fi
 				fi
-				
+
 				GROUPUUID="$(omv_config_get "//services/subversion/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/groupref")"
 				if [ "${GROUPUUID}" != "" ]; then
-					if omv_isuuid "${GROUPUUID}"; then						
+					if omv_isuuid "${GROUPUUID}"; then
 						GROUPNAME=$(omv_config_get "//system/usermanagement/groups/group[uuid='${GROUPUUID}']/name")
 						if ! omv_config_exists "//services/subversion/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/groupname"; then
 							echo "Transform Group UUID: ${GROUPUUID} to Groupname: ${GROUPNAME}"
@@ -96,20 +83,20 @@ case "$1" in
 						fi
 					fi
 				fi
-				
+
 				privileges_index=$(( ${privileges_index} - 1 ))
 			done
-			
+
 			index=$(( ${index} - 1 ))
 		done
-	
+
 		# Clean up old installation?
 		if [ -f /etc/apache2/conf.d/omv-svn ]; then
 
 			/bin/rm -f /etc/apache2/conf.d/omv-svn
 			omv-mkconf subversion
 		fi
-	
+
 		monit restart apache2
 
 	;;
