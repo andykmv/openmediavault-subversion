@@ -8,7 +8,7 @@ Homepage: http://omv-plugins.org/
 
 Package: openmediavault-subversion
 Architecture: all
-Depends: openmediavault (>= 0.4), apache2.2-common, subversion, libapache2-svn,
+Depends: ${misc:Depends}, openmediavault (>= 0.4), apache2.2-common, subversion, libapache2-svn,
  libapache2-mod-authnz-external, pwauth
 Description: OpenMediaVault Subversion (SVN server) plugin
  Run a subversion server through OMV's apache2. Create and manage
